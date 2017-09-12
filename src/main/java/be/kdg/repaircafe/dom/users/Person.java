@@ -5,7 +5,7 @@ import java.io.Serializable;
 
 public class Person implements Serializable {
 
-    private Integer personid;
+    private Integer personId;
 
     private Address address;
 
@@ -24,7 +24,7 @@ public class Person implements Serializable {
     }
 
     public Integer getId() {
-        return personid;
+        return personId;
     }
 
     /**
@@ -66,12 +66,12 @@ public class Person implements Serializable {
         this.address = address;
     }
 
-    public Integer getPersonid() {
-        return personid;
+    public Integer getPersonId() {
+        return personId;
     }
 
-    public void setPersonid(Integer personid) {
-        this.personid = personid;
+    public void setPersonId(Integer personId) {
+        this.personId = personId;
     }
 
     @Override

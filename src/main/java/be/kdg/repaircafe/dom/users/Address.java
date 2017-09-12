@@ -10,7 +10,7 @@ import java.io.Serializable;
  */
 public class Address implements Serializable {
 
-    private Integer addressid;
+    private Integer addressId;
 
     private String street;
 
@@ -31,7 +31,7 @@ public class Address implements Serializable {
     }
 
     public Integer getId() {
-        return addressid;
+        return addressId;
     }
 
     public String getStreet() {
@@ -66,12 +66,12 @@ public class Address implements Serializable {
         this.city = city;
     }
 
-    public Integer getAddressid() {
-        return addressid;
+    public Integer getAddressId() {
+        return addressId;
     }
 
-    public void setAddressid(Integer addressid) {
-        this.addressid = addressid;
+    public void setAddressId(Integer addressId) {
+        this.addressId = addressId;
     }
 
     @Override

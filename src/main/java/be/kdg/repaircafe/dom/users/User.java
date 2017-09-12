@@ -14,6 +14,7 @@ import java.util.List;
  * @author wouter
  */
 public class User implements Serializable {
+
     private Integer userId;
 
     private String username = null;
