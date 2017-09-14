@@ -2,6 +2,7 @@ package be.kdg.repaircafe.dom.users.roles;
 
 import be.kdg.repaircafe.dom.repairs.Repair;
 
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,7 +11,11 @@ import java.util.List;
  *
  * @author wouter
  */
+@Entity
+@DiscriminatorValue("ROLE_CLIENT")
 public class Client extends Role {
+
+    @OneToMany(targetEntity = Repair.class, cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "client")
     protected List<Repair> submittedRepairs;
 
     public Client() {

@@ -3,12 +3,20 @@ package be.kdg.repaircafe.dom.users.roles;
 import be.kdg.repaircafe.dom.exceptions.UserException;
 import be.kdg.repaircafe.dom.users.User;
 
+import javax.persistence.*;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+@Entity
+@DiscriminatorColumn(name = "RoleType", discriminatorType = DiscriminatorType.STRING)
 public abstract class Role {
+    @Id
+    @GeneratedValue
+    @Column(nullable = false)
     private Integer roleId;
+
+    @ManyToOne(targetEntity = User.class)
     private User user;
 
     public static <T extends Role> boolean hasRole(User user, Class<T> role) throws UserException {

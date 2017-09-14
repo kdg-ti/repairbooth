@@ -1,5 +1,6 @@
 package be.kdg.repaircafe.dom.repairs;
 
+import javax.persistence.*;
 import java.io.Serializable;
 import java.time.Duration;
 import java.time.LocalDateTime;
@@ -14,28 +15,44 @@ import java.util.Objects;
  * @author wouter
  * @link(be.kdg.repaircafemodel.dom.repairs.Repair) details
  */
+@Entity
 public class RepairDetails implements Serializable {
-
+    @Column(nullable = false)
+    @Id
+    @GeneratedValue
     private Integer repairDetailsId;
 
+    @Column
     private String defect;
 
+    @Column
     private String description;
 
+    @Column
     private String evaluation;
 
+    @Column
     private String rebuttal;
 
+    @Column(length = 10)
+    @Enumerated(EnumType.STRING)
     private Rating rating;
 
+    @Column(length = 10)
+    @Enumerated(EnumType.STRING)
     private Status status;
 
+    @Column(length = 10)
+    @Enumerated(EnumType.STRING)
     private PriceModel priceModel;
 
+    @Column
     private LocalDateTime dueDate;
 
+    @Column
     private LocalDateTime submitDate;
 
+    @Column(nullable = false)
     private boolean assigned;
 
     public RepairDetails(String defect, String description, PriceModel priceModel, LocalDateTime dueDate) {

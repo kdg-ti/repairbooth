@@ -1,5 +1,9 @@
 package be.kdg.repaircafe.dom.repairs;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import java.io.Serializable;
 
 /**
@@ -7,14 +11,20 @@ import java.io.Serializable;
  *
  * @author wouter
  */
+@Entity
 public class Item implements Serializable {
-
+    @Column(nullable = false)
+    @Id
+    @GeneratedValue
     private Integer itemId;
 
+    @Column
     private String productName;
 
+    @Column
     private String brand;
 
+    @Column
     private String category;
 
     public Item() {

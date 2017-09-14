@@ -40,7 +40,7 @@ repositories {
 
 dependencies {
     compile('org.springframework.boot:spring-boot-starter-data-jpa')
-    runtime('com.h2database:h2')
+    compile('com.h2database:h2')
     testCompile('org.springframework.boot:spring-boot-starter-test')
     testCompile(group: 'org.hamcrest', name: 'hamcrest-library', version: '1.3')
 }

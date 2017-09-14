@@ -1,7 +1,9 @@
 package be.kdg.repaircafe.dom.users;
 
 import be.kdg.repaircafe.dom.users.roles.Role;
+import org.hibernate.annotations.Fetch;
 
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.List;
 
@@ -13,16 +15,30 @@ import java.util.List;
  *
  * @author wouter
  */
+@Entity
+@Table(name = "USERS")
 public class User implements Serializable {
 
+    @Id
+    @GeneratedValue
+    @Column(nullable = false)
     private Integer userId;
 
+    @Column
     private String username = null;
 
+    @Column
     private String encryptedPassword;
 
+    @OneToOne(targetEntity = Person.class, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinColumn(name = "Person_Id", nullable = false)
     private Person person;
 
+    // https://en.wikibooks.org/wiki/Java_Persistence/OneToMany
+    // simplest solution is to use bidirectional relationship
+    @OneToMany(targetEntity = Role.class, cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "user")
+    // for some strange reason we need to add this, see: http://stackoverflow.com/questions/1995080/hibernate-criteria-returns-children-multiple-times-with-fetchtype-eager
+    @Fetch(org.hibernate.annotations.FetchMode.SELECT)
     private List<Role> roles;
 
     public User() {

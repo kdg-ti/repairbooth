@@ -4,6 +4,7 @@ package be.kdg.repaircafe.dom.repairs;
 import be.kdg.repaircafe.dom.users.roles.Client;
 import be.kdg.repaircafe.dom.users.roles.Repairer;
 
+import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
@@ -19,22 +20,37 @@ import java.time.LocalDateTime;
  * @see Repairer
  * @see Repair
  */
+@Entity
+@DiscriminatorColumn(name = "Discriminator", discriminatorType = DiscriminatorType.STRING)
+@DiscriminatorValue("Bid")
 public abstract class Bid implements Comparable<Bid>, Serializable {
 
+    @Column(nullable = false)
+    @Id
+    @GeneratedValue
     private Integer bidId;
 
+    @ManyToOne(targetEntity = Repair.class)
+    @JoinColumn(name = "Repair_Id")
     private Repair repair;
 
+    @ManyToOne(targetEntity = Repairer.class)
+    @JoinColumn(name = "Repairer_Id")
     private Repairer repairer;
 
+    @Column(nullable = false, length = 10)
     private double price;
 
+    @Column
     private String comment;
 
+    @Column(nullable = false)
     private boolean accepted = false;
 
+    @Column(nullable = false)
     private boolean eligible = true;
 
+    @Column
     private LocalDateTime timestamp;
 
     public Bid() {

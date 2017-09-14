@@ -1,16 +1,24 @@
 package be.kdg.repaircafe.dom.users;
 
+import javax.persistence.*;
 import java.io.Serializable;
 
-
+@Entity
 public class Person implements Serializable {
 
+    @Column(nullable = false)
+    @Id
+    @GeneratedValue
     private Integer personId;
 
+    @OneToOne(targetEntity = Address.class, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinColumns({@JoinColumn(name = "Address_Id")})
     private Address address;
 
+    @Column
     private String firstname;
 
+    @Column
     private String lastname;
 
     public Person() {

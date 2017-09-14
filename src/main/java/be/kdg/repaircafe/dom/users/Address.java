@@ -1,5 +1,9 @@
 package be.kdg.repaircafe.dom.users;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import java.io.Serializable;
 
 /**
@@ -8,16 +12,24 @@ import java.io.Serializable;
  *
  * @author wouter
  */
-public class Address implements Serializable {
-
+@Entity
+public class Address implements Serializable
+{
+    @Column(nullable = false)
+    @Id
+    @GeneratedValue
     private Integer addressId;
 
+    @Column
     private String street;
 
+    @Column
     private String nr;
 
+    @Column
     private String zip;
 
+    @Column
     private String city;
 
     public Address() {

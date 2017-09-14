@@ -1,10 +1,14 @@
 package be.kdg.repaircafe.dom.repairs;
 
+import javax.persistence.DiscriminatorValue;
+import javax.persistence.Entity;
 import java.io.Serializable;
 
 /**
  * @author wouter
  */
+@Entity
+@DiscriminatorValue("FixedBid")
 public class FixedBid extends Bid implements Serializable {
     public FixedBid() {
     }

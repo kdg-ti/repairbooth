@@ -1,5 +1,9 @@
 package be.kdg.repaircafe.dom.repairs;
 
+import javax.persistence.DiscriminatorValue;
+import javax.persistence.Entity;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 import java.io.Serializable;
 
 /**
@@ -7,6 +11,9 @@ import java.io.Serializable;
  *
  * @author wouter
  */
+@Entity
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorValue("PerhourBid")
 public class PerhourBid extends Bid implements Serializable {
 
     public PerhourBid() {

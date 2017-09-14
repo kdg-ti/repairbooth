@@ -3,6 +3,7 @@ package be.kdg.repaircafe.dom.users.roles;
 import be.kdg.repaircafe.dom.repairs.Bid;
 import be.kdg.repaircafe.dom.repairs.Repair;
 
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -13,15 +14,23 @@ import java.util.stream.Collectors;
  *
  * @author wouter
  */
+@Entity
+@DiscriminatorValue("ROLE_REPAIRER")
 public class Repairer extends Role {
+
+    @Column(length = 10)
     private double overalRating;
 
+    @Column
     private boolean rated = false;
 
+    @Column
     private String degree;
 
+    @OneToMany(targetEntity = Repair.class, cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "repairer")
     private List<Repair> assignedRepairs;
 
+    @OneToMany(targetEntity = Bid.class, mappedBy = "repairer", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<Bid> bids;
 
     public Repairer(String degree) {

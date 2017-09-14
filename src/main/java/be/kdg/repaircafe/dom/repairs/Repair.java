@@ -2,7 +2,10 @@ package be.kdg.repaircafe.dom.repairs;
 
 import be.kdg.repaircafe.dom.users.roles.Client;
 import be.kdg.repaircafe.dom.users.roles.Repairer;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -17,17 +20,30 @@ import java.util.List;
  *
  * @author wouter
  */
-public class Repair implements Comparable<Repair>, Serializable {
+@Entity
+public class Repair implements Comparable<Repair>, Serializable
+{
+    @Column(nullable = false)
+    @Id
+    @GeneratedValue
     private Integer repairId;
 
+    @OneToOne(targetEntity = Item.class, fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinColumn(name = "Item_Id")
     private Item item;
 
+    @OneToOne(targetEntity = RepairDetails.class, fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinColumn(name = "Repair_Details_Id")
     private RepairDetails details;
 
+    @ManyToOne(targetEntity = Repairer.class, fetch = FetchType.EAGER)
     private Repairer repairer;
 
+    @ManyToOne(targetEntity = Client.class, fetch = FetchType.EAGER, optional = false)
     private Client client;
 
+    @OneToMany(targetEntity = Bid.class, mappedBy = "repair", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private List<Bid> bids;
 
     public Repair(Item item, RepairDetails repDetails) {
