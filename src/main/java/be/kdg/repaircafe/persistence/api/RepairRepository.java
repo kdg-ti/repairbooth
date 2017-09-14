@@ -8,6 +8,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
  *
  * @author wouter
  */
-public interface RepairRepository extends JpaRepository<Repair, Integer> {
+public interface RepairRepository extends JpaRepository<Repair, Integer>, RepairRepositoryCustom{
     // https://programmeren3-repaircafe.rhcloud.com/repair-cafe-applicatie/repair-cafe-backend/backend-persistence-layer/
 }

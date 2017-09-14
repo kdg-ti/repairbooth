@@ -25,5 +25,4 @@ public class BidRepositoryTest {
         List<Bid> bids = bidRepository.findAll();
         assertThat(bids.size(), is(equalTo(3)));
     }
-
 }

@@ -21,8 +21,8 @@ import java.util.List;
  * @author wouter
  */
 @Entity
-public class Repair implements Comparable<Repair>, Serializable
-{
+@NamedQuery(name = "Repair.findRepairByClient", query = "SELECT r FROM Repair r WHERE r.client = :client")
+public class Repair implements Comparable<Repair>, Serializable {
     @Column(nullable = false)
     @Id
     @GeneratedValue
