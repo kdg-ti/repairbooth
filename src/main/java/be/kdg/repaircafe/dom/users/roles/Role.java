@@ -2,8 +2,10 @@ package be.kdg.repaircafe.dom.users.roles;
 
 import be.kdg.repaircafe.dom.exceptions.UserException;
 import be.kdg.repaircafe.dom.users.User;
+import org.springframework.security.core.GrantedAuthority;
 
 import javax.persistence.*;
+import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -61,6 +63,8 @@ public abstract class Role {
     }
 
     public abstract RoleType getRoleType();
+
+    public abstract Collection<? extends GrantedAuthority> getAuthorities();
 
     @Override
     public int hashCode() {

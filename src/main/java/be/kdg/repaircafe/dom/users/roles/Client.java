@@ -1,9 +1,12 @@
 package be.kdg.repaircafe.dom.users.roles;
 
 import be.kdg.repaircafe.dom.repairs.Repair;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
 import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 /**
@@ -50,6 +53,13 @@ public class Client extends Role {
      */
     public List<Repair> getRepairs() {
         return submittedRepairs;
+    }
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        List<GrantedAuthority> authorities = new ArrayList<>();
+        authorities.add(new SimpleGrantedAuthority("ROLE_CLIENT"));
+        return authorities;
     }
 
     @Override

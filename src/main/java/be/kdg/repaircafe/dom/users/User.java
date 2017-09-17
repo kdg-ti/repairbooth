@@ -2,9 +2,13 @@ package be.kdg.repaircafe.dom.users;
 
 import be.kdg.repaircafe.dom.users.roles.Role;
 import org.hibernate.annotations.Fetch;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 
@@ -17,7 +21,7 @@ import java.util.List;
  */
 @Entity
 @Table(name = "USERS")
-public class User implements Serializable {
+public class User implements Serializable, UserDetails {
 
     @Id
     @GeneratedValue
@@ -103,5 +107,74 @@ public class User implements Serializable {
     @Override
     public String toString() {
         return "User{" + userId + ", " + username + ", " + encryptedPassword + '}';
+    }
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities()
+    {
+        Collection<GrantedAuthority> authorities = new ArrayList<>();
+        roles.forEach(role -> authorities.addAll(role.getAuthorities()));
+        return authorities;
+    }
+
+    @Override
+    public String getPassword()
+    {
+        return getEncryptedPassword();
+    }
+
+    /**
+     * Get username for this user
+     *
+     * @return
+     */
+    public String getUsername()
+    {
+        return username;
+    }
+
+    public void setUsername(String username)
+    {
+        this.username = username;
+    }
+
+    @Override
+    public boolean isAccountNonExpired()
+    {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked()
+    {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired()
+    {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled()
+    {
+        return true;
+    }
+
+    public String getEncryptedPassword()
+    {
+        return encryptedPassword;
+    }
+
+    /**
+     * Change password for user
+     *
+     * @param encryptedPassword
+     * @throws UserServiceException
+     */
+    public synchronized void setEncryptedPassword(String encryptedPassword)
+    {
+        this.encryptedPassword = encryptedPassword;
     }
 }
