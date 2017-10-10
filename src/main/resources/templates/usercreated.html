@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns="http://www.w3.org/1999/xhtml"
+      layout:decorator="base">
+<head>
+    <title>Welcome in the Repair Cafe</title>
+</head>
+<body>
+<div class="container" layout:fragment="content">
+    <div class="row">
+        <div class="col-md-2" th:replace="fragments/aside :: aside(index='about')"></div>
+        <div class="col-md-8">
+            <div class="panel panel-default">
+                <div class="panel-heading"><h3>Welcome <span th:text="${userResource.personResource.firstname}"/></h3>
+                </div>
+                <div class="panel-body">
+                    <h4>User Details</h4>
+                    <table class="table">
+                        <tr>
+                            <th>ID</th>
+                            <td th:text="${userResource.userId}"></td>
+                        </tr>
+                        <tr>
+                            <th>Username</th>
+                            <td th:text="${userResource.username}"></td>
+                        </tr>
+                    </table>
+                    <p>You can now <a href="/login.do" th:href="@{/login.do}">login</a> and create a <a
+                            href="/newrepair.do" th:href="@{/newrepair.do}">new
+                        repair</a> or search for repairs</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

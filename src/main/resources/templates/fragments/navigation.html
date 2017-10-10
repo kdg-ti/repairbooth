@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml" lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Navigation Bar Template</title>
+</head>
+
+<body>
+<!-- Fixed navbar -->
+<nav class="navbar nav-bardefault" th:fragment="navigation">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
+                    aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/" th:href="@{/}">Repair Cafe</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="/" th:href="@{/}">About</a></li>
+                <li role="separator" class="divider"></li>
+                <li sec:authorize="hasRole('CLIENT')">
+                    <a href="/newrepair.do" th:href="@{/newrepair.do}">New repair</a>
+                </li>
+                <li sec:authorize="hasRole('REPAIRER')">
+                    <a href="/searchrepair.do" th:href="@{/searchrepair.do}">Search repairs</a>
+                </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="/register.do" th:href="@{/register.do}">Sign up</a></li>
+                <li sec:authorize="isAnonymous()">
+                    <a href="/login.do" th:href="@{/login.do}">Sign in</a>
+                </li>
+                <li sec:authorize="isAuthenticated()">
+                    <a href="/logout" th:href="@{/logout}">Logout</a>
+                </li>
+            </ul>
+            <div sec:authorize="hasRole('ROLE_ADMIN')">
+                This content is only shown to administrators.
+            </div>
+        </div>
+        <!--/.nav-collapse -->
+    </div>
+</nav>
+
+</body>
+</html>

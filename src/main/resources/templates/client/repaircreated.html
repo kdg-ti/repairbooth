@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns="http://www.w3.org/1999/xhtml"
+      layout:decorator="base">
+<head>
+    <title>Repair created</title>
+</head>
+<body>
+<div class="container" layout:fragment="content">
+    <div class="row">
+        <div class="col-md-2" th:replace="fragments/aside :: aside(index='about')"></div>
+        <div class="col-md-8">
+            <div class="panel panel-default">
+                <div class="panel-heading"><h3>Summary of your newly submitted repair</h3></div>
+                <div class="panel-body">
+                    <h4>Item Details</h4>
+                    <table class="table">
+                        <tr>
+                            <th>ID</th>
+                            <td th:text="${repairResource.repairId}"></td>
+                        </tr>
+                        <tr>
+                            <th>Product name</th>
+                            <td th:text="${repairResource.itemResource.productName}">$</td>
+                        </tr>
+                        <tr>
+                            <th>Brand</th>
+                            <td th:text="${repairResource.itemResource.brand}"></td>
+                        </tr>
+                        <tr>
+                            <th>Category</th>
+                            <td th:text="${repairResource.itemResource.category}"></td>
+                        </tr>
+                    </table>
+
+                    <h4>Repair Details</h4>
+                    <table class="table">
+                        <tr>
+                            <th>Submit Date</th>
+                            <td th:text="${#temporals.format(repairResource.repairDetailsResource.submitDate,'dd-MM-yyyy HH:mm')}"></td>
+                        </tr>
+                        <tr>
+                            <th>Due Date</th>
+                            <td th:text="${#temporals.format(repairResource.repairDetailsResource.dueDate,'dd-MM-yyyy HH:mm')}"></td>
+                        </tr>
+                        <tr>
+                            <th>Defect</th>
+                            <td th:text="${repairResource.repairDetailsResource.defect}"></td>
+                        </tr>
+                        <tr>
+                            <th>Description</th>
+                            <td th:text="${repairResource.repairDetailsResource.description}"></td>
+                        </tr>
+                        <tr>
+                            <th>Price model</th>
+                            <td th:text="${repairResource.repairDetailsResource.priceModel}"></td>
+                        </tr>
+                        <tr>
+                            <th>Current status</th>
+                            <td th:text="${repairResource.repairDetailsResource.status}"></td>
+                        </tr>
+                        <tr>
+                            <th>Is assigned</th>
+                            <td th:text="${repairResource.repairDetailsResource.assigned}"></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

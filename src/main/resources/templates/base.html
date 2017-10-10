@@ -1,0 +1,22 @@
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <title layout:title-pattern="$CONTENT_TITLE">Layout Title will be replaced by Page Title!</title>
+
+    <object th:include="fragments/head :: head" th:remove="tag"/>
+</head>
+
+<body>
+
+<nav th:replace="fragments/navigation :: navigation"></nav>
+<div class="container" layout:fragment="content">
+
+    <!-- include here the content of the current page visited by the user -->
+</div>
+
+<div id="my-template-footer" th:replace="fragments/footer :: footer">Template footer</div>
+<th:block layout:fragment="script"></th:block>
+</body>
+</html>

@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml" lang="en">
+<head>
+    <meta charset="UTF-8"/>
+</head>
+
+<body>
+<!-- Fixed aside bar -->
+<div class="col-lg-2" th:fragment="aside">
+    <div class="list-group small">
+        <a href="/" class="list-group-item list-group-item-action"
+           th:classappend="${index == 'about' ? 'active' : ''}">About</a>
+        <a href="/newrepair.do" class="list-group-item list-group-item-action"
+           th:classappend="${index == 'newrepair' ? 'active' : ''}">New repair</a>
+        <a sec:authorize="hasRole('REPAIRER')" href="/searchrepair.do" class="list-group-item list-group-item-action"
+           th:classappend="${index == 'searchrepair' ? 'active' : ''}">Search repair</a>
+    </div>
+</div>
+</body>
+</html>

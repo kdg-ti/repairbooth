@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns="http://www.w3.org/1999/xhtml"
+      layout:decorator="base">
+<head>
+    <title>New Repair</title>
+</head>
+<body>
+<div class="container" layout:fragment="content">
+    <div class="row">
+        <div class="col-md-2" th:replace="fragments/aside :: aside(index='newrepair')"></div>
+        <div class="col-md-8">
+            <div class="panel panel-default">
+                <div class="panel-heading"><h3>Enter details about your broken item</h3></div>
+                <div class="panel-body">
+                    <form action="/saverepair.do" method="post" th:object="${repairResource}">
+                        <div class="form-group">
+                            <label for="product_name">Product name</label>
+                            <input type="text" th:field="*{itemResource.productName}" class="form-control"
+                                   id="product_name" placeholder="Enter product name">
+                        </div>
+                        <div class="form-group">
+                            <label for="category">Category</label>
+                            <!--<input type="text" th:field="*{itemResource.category}" class="form-control" id="category"
+                                   placeholder="Enter category">-->
+                            <select class="form-control chosen" required name="category" id="category"
+                                    th:field="*{itemResource.category}">
+                                <option value="0">Enter category</option>
+                                <option th:each="category: ${categories}"
+                                        th:value="${category.name}"
+                                        th:text="${category.name}"></option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="brand">Brand</label>
+                            <!--<input type="text" th:field="*{itemResource.brand}" class="form-control" id="brand"
+                                   placeholder="Enter brand">-->
+                            <select class="form-control chosen" required name="category" id="brand"
+                                    th:field="*{itemResource.brand}">
+                                <option value="0">Enter brand</option>
+                                <option th:each="brand: ${brands}"
+                                        th:value="${brand.name}"
+                                        th:text="${brand.name}"></option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="defect">Select defect</label>
+                            <select class="form-control chosen" required name="students" id="defect"
+                                    th:field="*{repairDetailsResource.defect}">
+                                <option value="0">Select defect</option>
+                                <option th:each="defect: ${defects}"
+                                        th:value="${defect.name}"
+                                        th:text="${defect.name}"></option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="description">Describe the defect</label>
+                            <textarea class="form-control" id="description"
+                                      th:field="*{repairDetailsResource.description}" rows="5"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="pricemodel">Select price model</label>
+                            <select class="form-control" id="pricemodel" th:field="*{repairDetailsResource.priceModel}">
+                                <option th:value="FIXED">Fixed price</option>
+                                <option th:value="PER_HOUR">Hourly wage</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="duedate">Due date</label>
+                            <input type="datetime-local" class="form-control"
+                                   th:value="*{repairDetailsResource.dueDate}"
+                                   th:field="*{repairDetailsResource.dueDate}" id="duedate">
+                        </div>
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </form>
+                </div>
+                <div class="col-md-4"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<th:block layout:fragment="script">
+    <!-- include Javascript code here -->
+</th:block>
+</body>
+</html>

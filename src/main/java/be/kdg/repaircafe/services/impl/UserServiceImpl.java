@@ -20,7 +20,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 /**
- * Service bean that demarcates the transactional boundary and that acts as a 'controller' for backend
+ * Service bean that demarcates the transactional boundary and that acts as a 'web' for backend
  * related operations.
  * <p>
  * A user can be Client, a Repairer or an Adminstrator

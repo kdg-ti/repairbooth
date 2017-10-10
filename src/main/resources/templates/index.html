@@ -1,0 +1,41 @@
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://www.w3.org/1999/xhtml"
+      xmlns="http://www.w3.org/1999/xhtml"
+      layout:decorator="base">
+<head>
+    <title>Repair Cafe</title>
+</head>
+<body>
+<div layout:fragment="content">
+    <div class="row">
+        <div class="col-lg-2" th:replace="fragments/aside :: aside(index='about')"></div>
+        <div class="col-lg-10">
+            <div class="panel panel-default">
+                <div class="panel-heading"><h6>Welcome</h6></div>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-md-12 text-justify">
+                            <div class="col-md-12">
+                                <h2>Welcome, have a repair</h2>
+                                <p>
+                                    A Repair Cafe is virtual place where people can have broken things made by
+                                    craftsmen. Every repair can be assessed by the customer.
+                                    Craftsmen are assessed according to the quality of their repairs. As a customer of
+                                    the Repair Cafe, you can thus always know who you entrust your things to.
+                                </p>
+                                <p>
+                                    You can register as a customer and/or craftsman at the Repair Cafe. Customers can
+                                    have their belongings repaired by the best craftsman at the best price and
+                                    professionals can look for repairs to help them earn a penny.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
