@@ -1,4 +1,4 @@
-package be.kdg.repaircafe.web.resources.convertors;
+package be.kdg.repaircafe.web.convertors;
 
 import be.kdg.repaircafe.dom.users.roles.Role;
 import org.springframework.core.convert.converter.Converter;

@@ -1,7 +1,7 @@
 package be.kdg.repaircafe.config;
 
 
-import be.kdg.repaircafe.web.resources.formatters.DateFormatter;
+import be.kdg.repaircafe.web.formatters.DateFormatter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.format.FormatterRegistry;

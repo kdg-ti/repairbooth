@@ -1,4 +1,4 @@
-package be.kdg.repaircafe.web.resources.formatters;
+package be.kdg.repaircafe.web.formatters;
 
 import org.springframework.format.Formatter;
 
