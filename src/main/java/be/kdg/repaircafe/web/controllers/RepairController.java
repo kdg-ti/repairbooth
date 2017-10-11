@@ -3,9 +3,9 @@ package be.kdg.repaircafe.web.controllers;
 import be.kdg.repaircafe.dom.repairs.Repair;
 import be.kdg.repaircafe.dom.users.User;
 import be.kdg.repaircafe.services.api.RepairService;
+import be.kdg.repaircafe.web.assemblers.RepairAssembler;
 import be.kdg.repaircafe.web.helpers.InformationControllerHelper;
 import be.kdg.repaircafe.web.resources.repairs.RepairResource;
-import ma.glasnost.orika.MapperFacade;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
@@ -22,20 +22,20 @@ import java.util.List;
 public class RepairController {
     private final RepairService repairService;
     private final InformationControllerHelper helper;
-    private final MapperFacade mapperFacade;
+    private final RepairAssembler repairAssembler;
 
     @Autowired
     public RepairController(RepairService repairService, InformationControllerHelper helper,
-                            MapperFacade mapperFacade) {
+                            RepairAssembler repairAssembler) {
         this.repairService = repairService;
         this.helper = helper;
-        this.mapperFacade = mapperFacade;
+        this.repairAssembler = repairAssembler;
     }
 
     @RequestMapping(value = "/getrepairs.do", method = RequestMethod.GET)
     public ModelAndView showRepairsForUser(@AuthenticationPrincipal User user, ModelAndView modelAndView) {
         List<Repair> repairs = repairService.findRepairsByUserId(user.getUserId());
-        List<RepairResource> repairResources = mapperFacade.mapAsList(repairs, RepairResource.class);
+        List<RepairResource> repairResources = repairAssembler.toResources(repairs);
         modelAndView.setViewName("repairs");
         modelAndView.addObject("repairResources", repairResources);
         return modelAndView;
@@ -62,8 +62,8 @@ public class RepairController {
             return modelAndView;
         }
 
-        Repair repair = repairService.saveRepair(user.getUserId(), mapperFacade.map(repairResource, Repair.class));
-        modelAndView.addObject("repairResource", mapperFacade.map(repair, RepairResource.class));
+        Repair repair = repairService.saveRepair(user.getUserId(), repairAssembler.fromResource(repairResource));
+        modelAndView.addObject("repairResource", repairAssembler.toResource(repair));
         modelAndView.setViewName("client/repaircreated");
 
         return modelAndView;
