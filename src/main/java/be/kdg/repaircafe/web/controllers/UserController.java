@@ -2,9 +2,8 @@ package be.kdg.repaircafe.web.controllers;
 
 import be.kdg.repaircafe.dom.users.User;
 import be.kdg.repaircafe.services.api.UserService;
+import be.kdg.repaircafe.web.assemblers.UserAssembler;
 import be.kdg.repaircafe.web.resources.users.UserResource;
-import ma.glasnost.orika.MapperFacade;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -21,13 +20,12 @@ import javax.validation.Valid;
 @Controller
 public class UserController {
 
-    private UserService userService;
-    private MapperFacade mapperFacade;
+    private final UserService userService;
+    private final UserAssembler userAssembler;
 
-    @Autowired
-    public UserController(UserService userService, MapperFacade mapperFacade) {
+    public UserController(UserService userService, UserAssembler userAssembler) {
         this.userService = userService;
-        this.mapperFacade = mapperFacade;
+        this.userAssembler = userAssembler;
     }
 
     // Login form
@@ -58,9 +56,9 @@ public class UserController {
             return new ModelAndView("redirect:/register.do");
         }
 
-        User userIn = mapperFacade.map(userResource, User.class);
-        User user = userService.addUser(userIn);
-        modelAndView.addObject("userResource", mapperFacade.map(user, UserResource.class));
+        User userIn = userAssembler.fromResource(userResource);
+        User userOut = userService.addUser(userIn);
+        modelAndView.addObject("userResource", userAssembler.toResource(userOut));
         modelAndView.setViewName("usercreated");
         return modelAndView;
     }
