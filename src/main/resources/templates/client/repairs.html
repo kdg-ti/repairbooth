@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns="http://www.w3.org/1999/xhtml"
+      layout:decorator="base">
+<head>
+    <title>Repair List</title>
+</head>
+<body>
+<div class="container" layout:fragment="content">
+    <div class="row">
+        <div class="col-md-2" th:replace="fragments/aside :: aside(index='products')"></div>
+        <div class="col-md-10">
+            <div class="panel panel-default">
+                <div class="panel-heading"><h3>Your repairs</h3></div>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-md-3 col-sm-6" th:each="repairResource : ${repairResources}">
+								<span class="thumbnail">
+									<img src="http://placehold.it/500x400" alt="image">
+									<h4 th:text="${repairResource.itemResource.productName}"></h4>
+									<p th:text="${repairResource.itemResource.brand}"></p>
+                                    <p th:text="${repairResource.itemResource.category}"></p>
+                                    <hr class="line">
+									<div class="row">
+										<div class="col-md-6 col-sm-6">
+                                            <p th:text="${repairResource.repairDetailsResource.description}"></p>
+                                        </div>
+									</div>
+								</span>
+                            </form>
+                        </div>
+                        <!-- END REPAIRS -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <th:block layout:fragment="script">
+        <!-- include Javascript code here -->
+    </th:block>
+</body>
+</html>

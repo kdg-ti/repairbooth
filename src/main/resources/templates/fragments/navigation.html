@@ -26,6 +26,9 @@
                 <li sec:authorize="hasRole('CLIENT')">
                     <a href="/newrepair.do" th:href="@{/newrepair.do}">New repair</a>
                 </li>
+                <li sec:authorize="hasRole('CLIENT')">
+                    <a href="/getrepairs.do" th:href="@{/getrepairs.do}">My repairs</a>
+                </li>
                 <li sec:authorize="hasRole('REPAIRER')">
                     <a href="/searchrepair.do" th:href="@{/searchrepair.do}">Search repairs</a>
                 </li>

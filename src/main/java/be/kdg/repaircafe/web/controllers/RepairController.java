@@ -7,6 +7,7 @@ import be.kdg.repaircafe.web.assemblers.RepairAssembler;
 import be.kdg.repaircafe.web.helpers.InformationControllerHelper;
 import be.kdg.repaircafe.web.resources.repairs.RepairResource;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -33,10 +34,11 @@ public class RepairController {
     }
 
     @RequestMapping(value = "/getrepairs.do", method = RequestMethod.GET)
+    @PreAuthorize("hasRole('ROLE_CLIENT')")
     public ModelAndView showRepairsForUser(@AuthenticationPrincipal User user, ModelAndView modelAndView) {
         List<Repair> repairs = repairService.findRepairsByUserId(user.getUserId());
         List<RepairResource> repairResources = repairAssembler.toResources(repairs);
-        modelAndView.setViewName("repairs");
+        modelAndView.setViewName("client/repairs");
         modelAndView.addObject("repairResources", repairResources);
         return modelAndView;
     }
