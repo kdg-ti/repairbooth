@@ -58,6 +58,10 @@ public abstract class Role {
         }
     }
 
+    public Integer getRoleId() {
+        return roleId;
+    }
+
     public void setUser(User user) {
         this.user = user;
     }
