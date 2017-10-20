@@ -33,6 +33,10 @@ public abstract class Role {
         return result.get();
     }
 
+    public Integer getRoleId() {
+        return roleId;
+    }
+
     public static List<Role> createRoles(List<RoleType> roleTypes) {
         return roleTypes.stream().map(roleType -> toRole(roleType)).collect(Collectors.toList());
     }
