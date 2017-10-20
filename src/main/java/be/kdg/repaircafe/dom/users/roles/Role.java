@@ -30,6 +30,10 @@ public abstract class Role {
         }
     }
 
+    public Integer getRoleId() {
+        return roleId;
+    }
+
     public static <T extends Role> T loadRole(User user, Class<T> role) throws UserException {
         List<Role> roles = user.getRoles();
         Optional<T> result = (Optional<T>) roles
