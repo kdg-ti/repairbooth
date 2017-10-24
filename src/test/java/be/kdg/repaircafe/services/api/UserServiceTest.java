@@ -46,32 +46,32 @@ public class UserServiceTest {
     }
 
     @Test
-    public void testFindUserById() throws Exception {
+    public void testFindUserById() {
         User user = userService.findUserById(1);
         assertThat(user, notNullValue());
     }
 
     @Test
-    public void testFindUserByUsername() throws Exception {
+    public void testFindUserByUsername() {
         User clarence = userService.findUserByUsername(realUsername);
         assertThat(clarence.getUsername(), equalToIgnoringCase(realUsername));
     }
 
     @Test
-    public void testFindUserByRole() throws Exception {
+    public void testFindUserByRole() {
         List<User> users = userService.findUsersByRole(Client.class);
         users.forEach(user -> assertThat(Role.loadRole(user, Client.class), instanceOf(Client.class)));
     }
 
     @Test(expected = UserServiceException.class)
-    public void testCheckLogin() throws Exception {
+    public void testCheckLogin() {
         User clarence = userService.findUserById(1);
         userService.checkLogin(clarence.getUserId(), realUsername);
         userService.checkLogin(clarence.getUserId(), fakeUsername);
     }
 
     @Test
-    public void testUpdateUser() throws Exception {
+    public void testUpdateUser() {
         User clarence = userService.findUserByUsername(realUsername);
 
         Person p = new Person("Wouter", "Deketelaere", new Address("Kleuterstraat", "1", "2800", "Mechelen"));
@@ -81,7 +81,7 @@ public class UserServiceTest {
     }
 
     @Test
-    public void testUpdatePassword() throws Exception {
+    public void testUpdatePassword() {
         String currentPassword = "piano123";
         String newPassword = "$eCret";
 
@@ -95,13 +95,13 @@ public class UserServiceTest {
     }
 
     @Test
-    public void testFindUsers() throws Exception {
+    public void testFindUsers() {
         List<User> users = userService.findUsers();
         assertThat(users, is(not(empty())));
     }
 
     @Test
-    public void testAddUser() throws Exception {
+    public void testAddUser() {
         Person p = new Person("Wouter", "Deketelaere", new Address("Kleuterstraat", "1", "2800", "Mechelen"));
         List<Role> identities = new ArrayList<>();
         identities.add(new Repairer("Master"));
@@ -116,7 +116,7 @@ public class UserServiceTest {
     }
 
     @Test(expected = UserServiceException.class)
-    public void testDeleteUser() throws Exception {
+    public void testDeleteUser() {
         userService.deleteUser(1);
         userService.findUserById(1);
     }
